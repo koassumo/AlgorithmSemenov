@@ -10,8 +10,21 @@ public class Main2 {
         int[] arr2 = {1, 2, 3, 4};
 
         Array a0 = new Array(1, -2, -3, -4, 5);
+        System.out.println("Задание 1");
+        System.out.println("Первоначальный массив: " + a0);
+        a0.deleteItem(2);
+        System.out.println("Удален элемент №2: " + a0);
+
+        System.out.println("");
+        System.out.println("Задания 2, 3, 4");
+
+        System.out.println("Первоначальный массив: " + a0);
+        System.out.print("Сортировка Bubble - O(N) : ");
         a0.sortBubble();
-        System.out.println(a0);
+        System.out.print("Сортировка Bubble - O(N/2) : ");
+        a0.sortBubbleAdvanced();
+        System.out.println("Сортированный массив: " + a0);
+
     }
 
     public static class Array {
@@ -33,6 +46,19 @@ public class Main2 {
             this();
             this.size = args.length;
             this.arr = args;
+        }
+
+        public int deleteItem(int index) {
+            if (index >= size || index < 0)
+                throw new ArrayIndexOutOfBoundsException(index);
+            else if (size -1  == 0)
+                throw new ArrayIndexOutOfBoundsException(-1);
+            else {
+                for (int i = index; i < size - 1; i++) {
+                    arr[i] = arr[i + 1];
+                }
+                return arr[--size];
+            }
         }
 
         public int get(int index) {
@@ -130,14 +156,32 @@ public class Main2 {
         }
 
         public void sortBubble() {
+            int step = 0;
             for (int i = 0; i < size; i++) {
                 for (int j = 0; j < size - 1; j++) {
+                    step++;
                     if (arr[j] > arr[j + 1])
                         swap(j, j + 1);
                 }
             }
             isSorted = true;
+            System.out.println("количество итераций = " + step);
         }
+
+
+        public void sortBubbleAdvanced() {
+            int step = 0;
+            for (int i = size; i >= 0; i--) {
+                for (int j = 0; j < i - 1; j++) {
+                    step++;
+                    if (arr[j] > arr[j + 1])
+                        swap(j, j + 1);
+                }
+            }
+            isSorted = true;
+            System.out.println("количество итераций = " + step);
+        }
+
 
         public void sortSelect() {
             for (int flag = 0; flag < size; flag++) {
