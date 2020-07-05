@@ -40,3 +40,4 @@ public class Stack {
         return stack[head];
     }
 }
+
