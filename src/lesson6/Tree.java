@@ -32,29 +32,32 @@ public class Tree {
 
     TreeNode root;
 
-    public void insert(Cat c) {
+    public int insert(Cat c) {
         TreeNode node = new TreeNode(c);
+        int levelNumber = 1;
         if (root == null) {
             root = node;
+            return levelNumber;
         } else {
             TreeNode current = root;
             TreeNode parent = null;
             while (true) {
+                levelNumber++;
                 parent = current;
                 if (c.getAge() < current.c.getAge()) {
                     current = current.left;
                     if (current == null) {
                         parent.left = node;
-                        return;
+                        return levelNumber;
                     }
                 } else if (c.getAge() > current.c.getAge()){
                     current = current.right;
                     if (current == null) {
                         parent.right = node;
-                        return;
+                        return levelNumber;
                     }
                 } else {
-                    return;
+                    return levelNumber;
                 }
             }
         }
